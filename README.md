@@ -1,2 +1,2 @@
 # axion-tr
-A translation for original Axion toolkit
+Turkish translation for original Axion toolkit
