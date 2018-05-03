@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            border: solid thin;
+            border-color: brown;
+            border-radius: 10px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            margin-right: 80px;
+            margin-left: 80px;
+        }
+        
+        p {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            margin-right: 30px;
+            margin-left: 50px;
+        }
+        
+        h1 {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            margin-right: 20px;
+            margin-left: 20px;
+            text-align: center;
+        }
+        
+        h2 {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 20px;
+            padding: 15px;
+        }
+        
+        h3 {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 20px;
+            padding: 15px;
+        }
+        
+        h4 {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 20px;
+            padding: 10px;
+        }
+        
+        img {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        
+        li {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 50px;
+        }
+        
+        .highlight {
+            font-size: 13px;
+            margin-right: 30px;
+            margin-left: 50px;
+            line-height: 19px;
+            border-radius: 3px
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>CTF GUIDE</h1>
+        <h2>What Is Reverse Engineering?</h2>
+        <h3>Introduction</h3>
+        <p>Reverse Engineering (RE) is the process of discovering how different software and hardware technologies work.</p>
+        <p>Nowadays, computer software and games are also cracked by Reverse Engineering tools.</p>
+        <p>Under normal circumstances, software written in programming languages such as C, C ++ is cracked by tools called Disassembler. Disassembler translates the code into Assembler which is machine language. This process is called Reverse Code Engineering (RCE).</p>
+        <h3>What Is The Relation With CTFs?</h3>
+        <p>In order to solve the Rev questions which are asked as an important sub-question group in the CTFs, generally it is necessary to make the compiled code to source code using special tools. So we can find the Flags hidden in them.</p>
+        <h3>Useful Links and Resources</h3>
+        <ul>
+            <li><a href="https://www.hex-rays.com/products/ida/">IDA pro</a> - <em>Disassembler</em> which is the most used and which has many features</li>
+            <li><a href="https://www.gnu.org/software/gdb/">GDB</a> - GNU Debugger</li>
+            <li><a href="https://github.com/longld/peda">PEDA</a> - GDB plugin. It adds new features to GDB.</li>
+            <li><a href="http://liveoverflow.com/binary_hacking/reverse_engineering.html">LiveOverflow</a> - Reverse Engineering training </li>
+        </ul>
+        <h2>Sample Questions with Solutions</h2>
+        <p>There are many different kind of Reverse Engineering questions; however, we'll try to explain with a few examples.</p>
+        <h3>CanYouPwnME CTF REV100</h3>
+        <p>After seeing that the file is an executable file, using this command</p>
+        <div class="highlight"><pre><span></span>chmod +x rev100
+</pre></div>
+
+        <p>we set permission to run and run it.</p>
+        <p><img src="reverse_files/rev1.png"></p>
+        <p>It wants password information from us. Using <em>Axion</em>, we display its <em>Metadata</em> and examine <em>strings</em> output.</p>
+        <p><img src="reverse_files/rev2.png"></p>
+        <p>FLAG = <strong>BATLAMYUS</strong></p>
+        <h3>CanYouPwnME CTF REV200</h3>
+        <p>Using Axion, we determine file's format,</p>
+        <p><img src="reverse_files/rev3.png"></p>
+        <p>After that we run it and we find out that the program expects an input from us and it gives results according to its correctness.</p>
+        <p><img src="reverse_files/rev4.png"></p>
+        <p>So far we have analyzed our program superficially and we have the following; the program wants a pincode from us and compares it to a value and tests the validity. Using <em>GDB</em>, we get a little deeper into the program. We run our program with the gdb <em>rev200</em> command and put a breakpoint on the main function.</p>
+        <p><img src="reverse_files/rev5.png"></p>
+        <p>Then, we run it with the <em>run</em> command. Our expectation from our program is to make a comparison after it receives input from us. It calls the <em>scanf</em> function in the input section and compares the input with the correct value with <em>cmp</em>. After running it, we use the <em>next</em> command to examine one by one and get to the point where the scanf function is called.</p>
+        <p><img src="reverse_files/rev6.png"></p>
+        <p>After <em>scanf</em> is called, we see <em>cmp eax, 0x58f *. Here we see that the value it wants from us is *0x58f</em>, but it is <em>hexadecimal</em>. Converting hexadecimal to <em>decimal</em> reaches us the end <strong><em>0x58f -&gt; 1423.</em></strong></p>
+        <p><img src="reverse_files/rev8.png"></p>
+        <p>FLAG = <strong>1423</strong></p>
+        <p>The solutions of the above questions are benefited from <a href="https://www.aucyberclub.org/cozumler/2017/02/17/cypmctfcozumleri.html">buradan</a></p>
+    </div>
+
+</body>
+
+</html>

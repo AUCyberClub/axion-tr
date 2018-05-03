@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            border: solid thin;
+            border-color: brown;
+            border-radius: 10px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            margin-right: 80px;
+            margin-left: 80px;
+        }
+        
+        p {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            margin-right: 30px;
+            margin-left: 50px;
+        }
+        
+        h1 {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            margin-right: 20px;
+            margin-left: 20px;
+            text-align: center;
+        }
+        
+        h2 {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 20px;
+            padding: 15px;
+        }
+        
+        h3 {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 20px;
+            padding: 15px;
+        }
+        
+        h4 {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 20px;
+            padding: 10px;
+        }
+        
+        img {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        
+        li {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 50px;
+        }
+        
+        .highlight {
+            font-size: 13px;
+            margin-right: 30px;
+            margin-left: 50px;
+            line-height: 19px;
+            border-radius: 3px
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>CTF GUIDE</h1>
+        <h2>What Is Cryptography?</h2>
+        <h3>Introduction</h3>
+        <p>The simplest definition is the whole set of algorithms used to limit the legibility of an existing data. It provides data security by restricting the readability of the data.</p>
+        <p>Generally, the form of the data is changed without corrupting the data. So, it ensures data security and prevents data loss.</p>
+        <h3>What Is The Relation With CTFs?</h3>
+        <p>It has its own category on CTFs and is asked as <em>Crypto</em> questions. In these questions, our goal is usually to capture <em>FLAG</em> by returning the modified data to readable forms. 4 subcategories are allocated.</p>
+        <h4>Encoding</h4>
+        <p>The aim of <em>Encoding</em> is to convert the form of the data to another form without any data loss. The difference between <em>Encryption</em> and <em>Encoding</em> is that <em>Encoding</em> doesn't use <strong>key</strong> when doing the operation. The opposite of <em>Encode</em> operation is <em>Decode</em>. Only thing is needed to <em>Decoding</em> operation is the algorithm used for <em>Encoding</em>. There is no need any special key or password.</p>
+        <p>Most common types:</p>
+        <ul>
+            <li>Base64</li>
+            <li>Unicode</li>
+            <li>ASCII</li>
+            <li>Base Converter</li>
+        </ul>
+        <h4>Encrypting</h4>
+        <p>It has the same goal as <em>Encoding</em> but uses a special <strong>key</strong> in the * Encrypt* operation. So, it is necessary to know this special key along with the algorithm for <em>Decrypt</em> operation. The only way to decrypt a password without a private key is to use <em>Brute Force</em> attack, every word as much as possible should be tried as a key :D</p>
+        <p>There are two types of subtypes, public key cryptography and private key cryptography.</p>
+        <p>There is only one key in private key cryptography. When data is transmitted, the data is encrypted with this key, and the recipient decrypts it with this key again. The main problem is that at the beginning of the transmission, sending the key which is used to encryt to another person without showing it to anyone.</p>
+        <p>There are two keys in public key cryptography and one is distributed (<em>public</em>) and the other is <em>private</em>. Also, the <em>public</em> key is derived from the private key, and then the person releases the <em>public</em> key in a format that anyone can see. When someone wants to transmit secure data to another person, s/he decrypts it with the * public * key of the person to whom s/he wants to send the data. Then transmit the data. Data encrypted with <em>public</em> key can be decrypted with <em>private</em> key only. <em>Private</em> key can not be obtained using <em>public</em> key. It is much slower than private key cryptography, but this solves the key transmission problem, which is a problem with private key cryptography.
+        </p>
+        <p>These two methods are usually used hybrid.</p>
+        <p>Types of private key ciphers:</p>
+        <ul>
+            <li>DES</li>
+            <li>AES</li>
+            <li>Vigenere</li>
+            <li>Blowfish</li>
+        </ul>
+        <p>Types of public key ciphers::</p>
+        <ul>
+            <li>RSA</li>
+            <li>DSA</li>
+            <li>TLS</li>
+        </ul>
+        <h4>Hashing</h4>
+        <p>The purpose of Hashing * algorithms is to encrypt the data in an irreversible manner. <em>Hashing</em> algorithms work one way and do not require a key. An important point is that length of the output (obtained passwords) is always the same regardless of the length of the unencrypted data. For example, the * MD5 * algorithm always generates passwords that are 32 characters long.</p>
+        <p>It is used in many different areas. One of these areas is operating systems. For example on <em>Linux</em> hashing is used for user authentication, meaning user passwords are kept as hashed.</p>
+        <p><em>Brute Force</em> attack is used to crack. The aim is to pass all the words in the word list one by one through the same hash algorithm and to check whether the obtained passwords are equal to the desired password to be cracked.</p>
+        <p>Most common types:</p>
+        <ul>
+            <li>MD5</li>
+            <li>SHA-1</li>
+            <li>SHA-512</li>
+        </ul>
+        <h4><strong>Obfuscation</strong></h4>
+        <p>Obfuscation, like its name implies, blends to ensure data security. Basically similar to Encoding but simpler. As an example, it can be shown as an example that Obfuscation process is performed so that source codes of programs can not be understood by everyone and thefts can be prevented.
+        </p>
+        <p>Most common types:</p>
+        <ul>
+            <li>Ook!</li>
+            <li>Brainfuck</li>
+            <li>JS Obfuscator</li>
+        </ul>
+        <h3>Useful Links and Resources</h3>
+        <ul>
+            <li><a href="https://www.dcode.fr/">dcode.fr</a> - A site that contains many crypto algorithms and solvers.</li>
+            <li><a href="https://ctfs.github.io/resources/topics/cryptography/README.html">CTF Resources</a> - A resource containing information about the subject.</li>
+            <li><a href="https://cryptopals.com/">Cryptopals</a> - A site that contains information and questions about the subject.</li>
+        </ul>
+        <h2>Sample Questions with Solutions</h2>
+        <p>There are many different kind of Cryptography questions; however, we'll try to explain with a few examples.</p>
+        <h3>CanYouPwnME CTF CRYPTO25</h3>
+        <p><strong>Question:</strong> PCYvKDEAJCdvLSVvLThvLyI= </p>
+        <p>It looks like Base64 because of the <strong><em>"="</em></strong> sign at the end of the string, in fact it is not Encoded with Base64. We find by trial and error that the code is Encoded with XOR :</p>
+        <p><img src="crypto_files/cry1.png"></p>
+        <p>FLAG = <strong>cypwn_{x0rz0rg0p}</strong></p>
+        <h3>CanYouPwnME CTF CRYPTO50</h3>
+        <p><strong>Question:</strong> <em>Text: cfxdigthdppymtdbqyz</em> </p>
+        <p>​ <em>Key: TBCXRL</em></p>
+        <p>Ciphertext appears to be <strong>Encrypted</strong> as it comes with <em>key</em>. We assume it is <strong>Vigenere</strong>:</p>
+        <p><img src="crypto_files/cry2.png"></p>
+        <p>We reach the result of <code>Jevgrvagbsyntsbezng</code>. On this output we find <em>flag</em> if we rotate <strong>Rot13</strong>:</p>
+        <p><img src="crypto_files/cry3.png"></p>
+        <p>FLAG = <strong>cypwn_{Writeintoflagformat}</strong></p>
+        <h3>CanYouPwnME CTF CRYPTO50-2</h3>
+        <p><strong>Question:</strong> Vm0wd2VHUXhTWGhXV0doV1YwZDRWbFl3WkRSV01WbDNXa1J TVjAxV2JETlhhMUpUVm14S2MyTkliRmhoTVhCUVZqSjRZV1JIVmtsalJt UnBWa1ZhU1ZkV1pEUlRNbEpYVW01T2FGSnRVbkJXYTFaaFUxWmtW MXBJY0d4U2EzQllWakkxUzJGV1NuUmhSemxWVm14YU0xUnNXbUZX YkdSeVYyeENWMkV3Y0ZSV1ZWcFNaREZDVWxCVU1EMD0
+        </p>
+        <p>We start to decode with <em>Base64</em>, because of the only password is given, we think that its <strong>Encoded</strong>. After 9 times <em>Decoding</em>, we reach the flag:</p>
+        <p><img src="crypto_files/cry4.png"></p>
+        <p>FLAG = <strong>cypwn{babyFl4g}</strong></p>
+        <h3>CanYouPwnME CTF CRYPTO50-3</h3>
+        <p><strong>Question:</strong> <em>Hold Your Breath and Count to 27395</em></p>
+        <p>​ <em>6e13409111b425a434d1cd9a80743669ec7385f9</em></p>
+        <p>Again, we do not have a <em>key</em> but this time the <em>Decode</em> methods do not work and we naturally go to <em>Hashing</em>. First we use axion to find out which algorithm is used to hash:</p>
+        <p><img src="crypto_files/cry5.png"></p>
+        <p>After seeing that it is <strong>SHA-1</strong> algorithm, then we search the internet thinking that it might have been cracked before we try the Brute-Force.</p>
+        <p><img src="crypto_files/cry6.png"></p>
+        <p>FLAG = <strong>26595</strong></p>
+        <h3>CanYouPwnME CTF CRYPTO50-4</h3>
+        <p><strong>Question:</strong> <em>Keep Calm and Discard Powers of 2</em> </p>
+        <p>​ <em>100256105256100256121256111256117256109256105256115256115256109256101</em></p>
+        <p>ASCII values can be selected in the given question. The thing that mixes up is "256" values. Because the ASCII table is composed of numbers from 0 to 255, we are clearing the 256s interspersed in order to prevent our direct conversion. And we get the result at the bottom:</p>
+        <p><code>100 105 100 121 111 117 109 105 115 115 109 101</code></p>
+        <p>Finally, when we translate these numbers into letters according to the ASCII table:</p>
+        <p><img src="crypto_files/cry7.png"></p>
+        <p>FLAG = <strong>didyoumissme</strong></p>
+        <p>The solutions of the above questions are benefited from <a href="https://www.aucyberclub.org/cozumler/2017/02/17/cypmctfcozumleri.html">buradan</a></p>
+    </div>
+
+</body>
+
+</html>
